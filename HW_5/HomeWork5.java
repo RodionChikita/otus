@@ -1,3 +1,13 @@
+import java.util.*;
+
+public class HomeWork5 {
+    public static void main(String[] args) {
+        Integer[] dataset = new Integer[10_000];
+        final Random random = new Random();
+        for (int i = 0; i < dataset.length; i++) {
+            dataset[i] = random.nextInt();
+        }
+        List datasetArray = new ArrayList(Arrays.asList(dataset));
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,6 +34,12 @@ public class HomeWork5 {
         }
         long endTimeBubleSort = System.currentTimeMillis();
         System.out.println("BubleSort: " + (endTimeBubleSort - startTimeBubleSort) + " milliseconds");
+        long startTimeCollectionSort = System.currentTimeMillis();
+        Collections.sort(datasetArray);
+        long endTimeCollectionSort = System.currentTimeMillis();
+        System.out.println("CollectionSort: " + (endTimeCollectionSort - startTimeCollectionSort) + " milliseconds");
+        long timeDifference = (endTimeBubleSort - startTimeBubleSort) / (endTimeCollectionSort - startTimeCollectionSort);
+        System.out.println("Алгоритм Collection.sort O(n*logn) работает быстрее метода пузырьковой сортировки O(n^2) в ~" + timeDifference + " раз.");
 
         long startTimeCollectionSort = System.currentTimeMillis();
         List datasetArray = new ArrayList(Arrays.asList(dataset));
