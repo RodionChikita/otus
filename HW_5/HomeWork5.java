@@ -4,9 +4,10 @@ public class HomeWork5 {
     public static void main(String[] args) {
         Integer[] dataset = new Integer[10_000];
         final Random random = new Random();
-        for (int i = 0; i< dataset.length; i++){
+        for (int i = 0; i < dataset.length; i++) {
             dataset[i] = random.nextInt();
         }
+        List datasetArray = new ArrayList(Arrays.asList(dataset));
         long startTimeBubleSort = System.currentTimeMillis();
         for (int i = 0; i < dataset.length - 1; i++) {
             int indicator = 0;
@@ -25,9 +26,7 @@ public class HomeWork5 {
         }
         long endTimeBubleSort = System.currentTimeMillis();
         System.out.println("BubleSort: " + (endTimeBubleSort - startTimeBubleSort) + " milliseconds");
-
         long startTimeCollectionSort = System.currentTimeMillis();
-        List datasetArray = new ArrayList(Arrays.asList(dataset));
         Collections.sort(datasetArray);
         long endTimeCollectionSort = System.currentTimeMillis();
         System.out.println("CollectionSort: " + (endTimeCollectionSort - startTimeCollectionSort) + " milliseconds");
