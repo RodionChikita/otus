@@ -7,6 +7,10 @@ public class HomeWork4 {
 
         Question question1 = new Question(1, "Question1?");
         Test.addQuestion(question1);
+        int correctCount = 0;
+        int wrongCount = 0;
+
+        Question question1 = new Question(1, "Question1?");
         question1.addAnswer(new AnswerOptions(1, "A1", false));
         question1.addAnswer(new AnswerOptions(2, "B1", true));
         question1.addAnswer(new AnswerOptions(3, "C1", false));
@@ -18,7 +22,9 @@ public class HomeWork4 {
         question2.addAnswer(new AnswerOptions(3, "C2", true));
         question2.addAnswer(new AnswerOptions(4, "D2", false));
         Question question3 = new Question(3, "Question3?");
+      HW-4-Edited
         Test.addQuestion(question3);
+      main
         question3.addAnswer(new AnswerOptions(1, "A3", true));
         question3.addAnswer(new AnswerOptions(2, "B3", false));
         question3.addAnswer(new AnswerOptions(3, "C3", false));
@@ -37,6 +43,15 @@ class Test {
             questions.get(i).questionPrint();
             Scanner scanner = new Scanner(System.in);
             if (questions.get(i).correct(scanner.nextInt())) {
+
+
+        Question[] questions = {question1, question2, question3};
+
+        for (int i = 0; i < questions.length; i++) {
+            questions[i].questionPrint();
+            Scanner scanner = new Scanner(System.in);
+            if (questions[i].correct(scanner.nextInt())) {
+
                 correctCount++;
             } else {
                 wrongCount++;
@@ -88,6 +103,9 @@ class AnswerOptions {
     private String answerText;
 
     private boolean correct;
+
+    private Question question;
+
 
 
     public AnswerOptions(int answerNumber, String answer, boolean correct) {
