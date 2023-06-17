@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class GameTest3 {
     private final DiceImplFake3 dice = new DiceImplFake3();
-    private final ArrayList<String> actualFlow = new ArrayList<>();
+    private final ArrayList<Player> actualFlow = new ArrayList<>();
     private final GameWinnerConsolePrinterFake winnerPrinter = new GameWinnerConsolePrinterFake(actualFlow) ;
     private final Game game = new Game(dice, winnerPrinter);
 
@@ -18,8 +18,10 @@ public class GameTest3 {
     public void testGameWithWinnerPlayer2() {
         String scenario = "Тест победил второй игрок";
         try {
-            game.playGame(new Player("Player1"), new Player("Player2"));
-            Assertions.assertEquals("Player2", actualFlow.get(0));
+            Player player1 = new Player("Player 1");
+            Player player2 = new Player("Player 2");
+            game.playGame(player1, player2);
+            Assertions.assertEquals(player2, actualFlow.get(0));
 
             System.out.printf("\"%s\" passed %n", scenario);
 

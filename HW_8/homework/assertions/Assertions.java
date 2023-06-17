@@ -1,5 +1,7 @@
 package homework.assertions;
 
+import homework.app.Player;
+
 public class Assertions {
     public static void assertEquals(int min, int max, int actual) {
         if (!(actual >= min && actual <=max)) {
@@ -47,4 +49,9 @@ public class Assertions {
         }
     }
 
+    public static void assertEquals(@org.jetbrains.annotations.NotNull Player expected, Player actual) {
+        if (!expected.equals(actual)) {
+            throw new AssertionError(String.format("Expected \"%s\" = \"%s\"", expected, actual));
+        }
+    }
 }

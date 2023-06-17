@@ -1,6 +1,5 @@
 package homework.tests;
 
-import homework.app.Dice;
 import homework.app.DiceImpl;
 import homework.assertions.Assertions;
 
