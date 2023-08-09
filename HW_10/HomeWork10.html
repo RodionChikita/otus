@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Домашняя работа</title>
+    <style>
+        h1, h2, h3 {
+            color: black;
+        }
+        
+        .content-block {
+            width: 800px;
+            margin-left: 20px;
+        }
+     
+        .input-form > input{
+            width: 300px;
+        }
+               
+        pre {
+            border: 1px solid steelblue;
+            width: 300px;
+            min-height: 50px;
+        }
+		
+		#statTab {
+            border: 1px solid steelblue;
+            border-collapse: collapse;
+			width: 100%;
+        }
+        
+        #statTab tr td {
+            border: 1px solid steelblue;
+            padding: 10px;
+        }
+		
+		#studForm {
+            border: 1px solid steelblue;
+			width: 70%;
+        }
+		
+		#studFormTab{
+		margin-left: 10px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		width: 100%;
+		}
+		
+		#fioTextBox{
+		border: 1px solid steelblue;
+		width: 90%;
+		border-radius 0px 0px;
+		}
+		
+		#datePicker{
+		border: 1px solid steelblue;
+		width: 90%;
+		border-radius 0px 0px;
+		}
+		
+		#gender{
+		border: 1px solid steelblue;
+		width: 91.5%;
+		border-radius 0px 0px;
+		}
+		
+		#addFinalForm{
+		border: 1px solid black;
+		border-radius 0px 0px;
+		}
+		
+    </style>
+		
+  
+</head>
+
+<body>
+
+
+
+<h2>
+    Форма добовления информации о студенте
+</h2>
+
+
+
+<form id = "studForm" action = # method = #>
+	<table id = "studFormTab">
+	<div>
+    <tr>
+        <td><label for = "fioTextBox">Имя студента:</label></td>
+        <td><input id = "fioTextBox" name = "fio" type = "text"></td>
+    </tr>
+	</div>
+
+	<div>
+    <tr>
+        <td><label for = "datePicker">Дата рождения:</label></td>
+        <td><input id = "datePicker"  name = "birthDate" type = "date" value = "2023-01-08"></td>
+    </tr>
+	</div>
+
+	<div> 
+    <tr>
+        <label>
+           <td> Пол:</td>
+            <td><select id = "gender" name = "gender">
+                <option value = "Мужчина" selected>Мужчина</option>
+                <option value = "Женщина">Женщина</option>
+            </select></td>
+        </label> 
+    </tr>
+	</div>
+	<div>
+    <tr><td><input id = "addFinalForm" type = "submit" value = "Добавить"></td></tr>
+	</table>
+	</div>
+</form>
+
+
+<h2>
+    Таблица студентов
+</h2>
+
+<table id = "statTab">
+	<thead>
+	<tr><td>Имя студента</td><td>Пол</td><td>Дата рождения</td><td>Возраст</td></tr>
+	</thead>
+		<tbody>
+		<tr><td colspan = "4">&nbsp</td></tr>
+		<tr><td colspan = "3">Средний возраст студентов</td><td id = "averageAgeContainer"> </td></tr>
+		</tbody>
+</table>
+
+<script>
+		const form = document.getElementById('studForm');
+
+		form.addEventListener('submit', getFormValue);
+
+		function getFormValue(event) {
+		event.preventDefault();
+
+		const fio = form.querySelector('[name="fio"]'),
+			birthDate = form.querySelector('[name="birthDate"]'),
+			gender = form.querySelector('[name="gender"]');
+
+		const student = {
+			fio: fio.value,
+			birthDate: birthDate.value,
+			gender: gender.value
+		};
+		
+		function get_current_age(date) {
+			return ((new Date().getTime() - new Date(date)) / (24 * 3600 * 365.25 * 1000)) | 0;
+		}
+			
+		const studentWithAge = {
+			...student,
+			age: get_current_age(student.birthDate)
+		};
+			
+			
+		console.log(get_current_age(student.birthDate))
+		console.log(studentWithAge)
+		const studentContainer = document.getElementById("studentContainer");
+		
+		function addRow(id){
+			table = document.getElementById(id)
+			tr = table.insertRow(1),
+			td = tr.insertCell(0);
+			td.appendChild(document.createTextNode(studentWithAge.fio));
+			td = tr.insertCell(1);
+			td.appendChild(document.createTextNode(studentWithAge.gender));
+			td = tr.insertCell(2);
+			td.appendChild(document.createTextNode(studentWithAge.birthDate));
+			td = tr.insertCell(3);
+			td.appendChild(document.createTextNode(studentWithAge.age));
+		}
+		
+		const ageSum = +localStorage.getItem("ageSum") + studentWithAge.age;
+		const studentsNumber = +localStorage.getItem("studentsNumber") + 1;
+		if(!ageSum){
+			localStorage.setItem("ageSum", studentWithAge.age);
+			localStorage.setItem("studentsNumber", "1");
+			ageSum = +localStorage.getItem("ageSum");
+			studentsNumber = +localStorage.getItem("studentsNumber")
+		}
+		
+		localStorage.setItem("ageSum", ageSum);
+		localStorage.setItem("studentsNumber", studentsNumber);
+		
+		const averageAge = Math.round(ageSum/studentsNumber);
+		
+		addRow("statTab");
+		
+		const averageAgeContainer = document.getElementById("averageAgeContainer");
+		averageAgeContainer.innerHTML = averageAge;
+		}
+		
+		reloaded  = function(){
+			localStorage.clear();
+		}  
+		window.onload = function() {
+		var loaded = sessionStorage.getItem('loaded');
+		if(loaded) {
+			reloaded();
+		} else {
+			sessionStorage.setItem('loaded', true);
+		}
+		}
+</script>
+
+</body>
+</html>
