@@ -8,7 +8,7 @@ public class ConverterNumberInStringImplement implements ConverterNumberInString
         int ones = digits.get(digits.size() - 1);
         int tens = digits.get(digits.size() - 2);
         int hundreds = digits.get(digits.size() - 3);
-        String onesString = digitInString("один", "двы", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", ones);
+        String onesString = digitInString("один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", ones);
         String tensString = digitInString("десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто", tens);
         String hundredsString = digitInString("сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот ", hundreds);
         if (wordGender == WordGender.WOMAN) {

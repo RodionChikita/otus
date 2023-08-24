@@ -10,7 +10,3 @@ public class Main {
         printer.print(inputData.inputData());
     }
 }
-enum WordGender{
-    MAN,
-    WOMAN
-}
